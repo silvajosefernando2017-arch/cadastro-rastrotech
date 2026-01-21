@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro Rastreamento Veicular</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #0f172a; color: #fff; padding: 20px; }
+    .container { max-width: 520px; margin: auto; background: #020617; padding: 20px; border-radius: 12px; }
+    h1 { text-align: center; margin-bottom: 20px; }
+    label { display: block; margin-top: 12px; font-size: 14px; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 6px; border-radius: 8px; border: none; }
+    button { margin-top: 20px; width: 100%; padding: 14px; border: none; border-radius: 10px; background: #22c55e; font-size: 16px; font-weight: bold; cursor: pointer; }
+    button:hover { background: #16a34a; }
+    .info { font-size: 12px; margin-top: 10px; opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Cliente</h1>
+
+    <label>Nome Completo</label>
+    <input id="nome" required />
+
+    <label>CPF</label>
+    <input id="cpf" required />
+
+    <label>E-mail</label>
+    <input id="email" type="email" required />
+
+    <label>Contato Principal (WhatsApp)</label>
+    <input id="contato1" required />
+
+    <label>Contato Secundário</label>
+    <input id="contato2" />
+
+    <label>Endereço Completo</label>
+    <textarea id="endereco"></textarea>
+
+    <label>Placa do Veículo</label>
+    <input id="placa" required />
+
+    <label>
+      <input type="checkbox" id="notifCobranca" /> Receber notificações de cobrança
+    </label>
+
+    <label>
+      <input type="checkbox" id="notifVeiculo" /> Receber notificação de veículo ligado/desligado
+    </label>
+
+    <button onclick="enviarWhatsApp()">Enviar Cadastro</button>
+
+    <p class="info">Ao enviar, seus dados serão encaminhados diretamente para o WhatsApp da empresa.</p>
+  </div>
+
+  <script>
+    function enviarWhatsApp() {
+      const nome = document.getElementById('nome').value;
+      const cpf = document.getElementById('cpf').value;
+      const email = document.getElementById('email').value;
+      const contato1 = document.getElementById('contato1').value;
+      const contato2 = document.getElementById('contato2').value;
+      const endereco = document.getElementById('endereco').value;
+      const placa = document.getElementById('placa').value;
+      const notifCobranca = document.getElementById('notifCobranca').checked ? 'Sim' : 'Não';
+      const notifVeiculo = document.getElementById('notifVeiculo').checked ? 'Sim' : 'Não';
+
+      const mensagem = `📋 *NOVO CADASTRO – RASTREAMENTO*%0A
+👤 Nome: ${nome}%0A
+🆔 CPF: ${cpf}%0A
+📧 Email: ${email}%0A
+📱 Contato 1: ${contato1}%0A
+📱 Contato 2: ${contato2}%0A
+🏠 Endereço: ${endereco}%0A
+🚗 Placa: ${placa}%0A
+💰 Notificação de Cobrança: ${notifCobranca}%0A
+🔌 Notificação Veículo Ligado/Desligado: ${notifVeiculo}`;
+
+      const telefoneEmpresa = '5591985178289'; // ALTERE PARA SEU WHATSAPP
+      const url = `https://wa.me/${telefoneEmpresa}?text=${mensagem}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
